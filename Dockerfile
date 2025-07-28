@@ -5,7 +5,7 @@ FROM gradle:8.5-jdk17 AS builder
 # Creamos un directorio de trabajo
 WORKDIR /home/gradle/src
 
-# Copiamos tódo el código de nuestro proyecto al contenedor
+# Copiamos tdo el código de nuestro proyecto al contenedor
 COPY --chown=gradle:gradle . .
 
 # Ejecutamos el comando de Gradle para crear el archivo .jar "gordo" (con todas las dependencias)
@@ -13,8 +13,8 @@ RUN gradle shadowJar --no-daemon
 
 
 # --- Etapa 2: Ejecutar la aplicación ---
-# Usamos una imagen mucho más pequeña que solo tiene lo necesario para ejecutar Java (JRE)
-FROM openjdk:17-jre-slim
+# Usamos la nueva imagen recomendada y ligera para ejecutar Java
+FROM eclipse-temurin:17-jre-alpine
 
 # Creamos el directorio de la aplicación
 WORKDIR /app
